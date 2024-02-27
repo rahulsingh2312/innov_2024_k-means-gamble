@@ -5,17 +5,28 @@ import base64
 from flask import Flask, render_template, request
 import pandas as pd
 import joblib
+import json 
 
 clustering_model = joblib.load('clustering.joblib')
 encoder = joblib.load('encoder.joblib')
 
-# import brochure_generator 
+import brochure_generator 
 
 app = Flask(__name__)
 CORS(app)
 
 API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
 headers = {"Authorization": "Bearer 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"}
+
+def slice_json(content):
+    start_index = content.find('{')
+    end_index = content.rfind('}')
+    json_part = content[start_index:end_index+1]
+    # print(json_part)
+    unescaped_json_string = json_part.encode().decode('unicode_escape')
+    print(unescaped_json_string)
+    json_data = json.loads(unescaped_json_string)
+    return json_data
 
 def query(payload):
 	response = requests.post(API_URL, headers=headers, json=payload)
@@ -64,11 +75,13 @@ def upload_file():
 
     return "Error: No file uploaded."
 
-app.route('/generate/brochure', methods=['POST'])
+@app.route('/generate/brochure', methods=['POST'])
 def generate_brochure():
     data = request.get_json()
-    input = data["input"]
-    return brochure_generator.generate_brochure(input)
+    output = brochure_generator.generate_brochure(data["product"], data["age_group"])
+    string_output= str(output)
+    response=slice_json(string_output)
+    return response
 
 if __name__ == "__main__":
   app.run() 
