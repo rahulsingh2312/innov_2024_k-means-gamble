@@ -14,7 +14,7 @@ from langchain.output_parsers import ResponseSchema
 from langchain.output_parsers import StructuredOutputParser
 model = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 
-def generate_brochure(input:str):
+def generate_brochure(product:str,age_group:str):
     product_schema=ResponseSchema(
         name="description",
         description="This is the description for the given product"
@@ -43,7 +43,8 @@ def generate_brochure(input:str):
 
     prompt = ChatPromptTemplate.from_template(template=prompt_template)
     messages=prompt.format_messages(
-        input=input,
+        input=[product,age_group],
         format_instructions=format_instructions
     )
     return model.invoke(messages)
+print(generate_brochure("car","adult"))
