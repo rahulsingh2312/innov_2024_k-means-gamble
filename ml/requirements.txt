@@ -3,5 +3,5 @@ matplotlib
 requests
 numpy 
 pandas
-json
 joblib
+scikit-learn==1.2.2

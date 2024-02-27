@@ -3,9 +3,8 @@ from flask_cors import CORS
 import requests
 import base64
 import pandas as pd
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import LabelEncoder
 import joblib
+
 app = Flask(__name__)
 CORS(app)
 
@@ -36,12 +35,14 @@ def upload_file():
     if uploaded_file:
         # Load the user-uploaded data into a DataFrame
         user_data = pd.read_csv(uploaded_file)
+        print(user_data)
 
         # Check if the required column is present in the user-uploaded data
         if 'Gender' in user_data.columns:
             # Apply label encoding to the relevant column
+            
             user_data['Gender'] = label_encoder.transform(user_data['Gender'])
-
+            
             # Use the clustering model to make predictions
             predictions = clustering_model.predict(user_data)
 
@@ -52,5 +53,7 @@ def upload_file():
             return "Error: 'Category' column not found in the uploaded file."
 
     return "Error: No file uploaded."
+
+
 if __name__ == "__main__":
   app.run() 
