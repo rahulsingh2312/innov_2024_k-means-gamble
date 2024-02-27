@@ -101,17 +101,11 @@ def generate_brochure():
     response=slice_json(string_output)
     return response
 
-@app.route('/scrape/data', methods=['POST'])
-def scrape_data():
-    data = request.get_json()
-    output = brochure_generator.scrape_data(data["product"])
-    return jsonify(output)
-
-@app.route('/locations', methods=['POST'])
-def location():
-    data = request.get_json()
-    my_list = data["list"]
-    output = {"data": locations.get_locations(my_list)}
+# @app.route('/locations', methods=['POST'])
+# def location():
+#     data = request.get_json()
+#     my_list = data["list"]
+#     output = {"data": locations.get_locations(my_list)}
 
     jsonify(output)
 
