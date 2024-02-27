@@ -68,7 +68,7 @@ const CsvUploader = () => {
       <div className="redball blur-3xl bg-green-400/50 w-96 h-96 fixed top-0 left-0 rounded-full"></div>
 
       <div className="mx-auto text-center text-7xl max-sm:text-5xl max-md:text-6xl font-bold mt-10">
-        Ready to Analyze your <span className="redtext">"Fit Streaks"</span> ?
+        Ready to Analyze your <span className="redtext">"User Data"</span> ?
       </div>
       <p className="text-sm max-sm:text-xs text-gray-600 mt-4 mx-auto text-center">
         Upload your CSV file and let our AI do the magic

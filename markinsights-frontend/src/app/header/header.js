@@ -28,7 +28,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const Header = () => {
   const [user, setUser] = useState(null);
-  const [userXP, setUserXP] = useState(0);
+  const [username, setUsername] = useState("user0");
   const [isActive, setIsActive] = useState(false);
   const router = useRouter();
   //  const router = useRouter();
@@ -45,11 +45,11 @@ const Header = () => {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           const userData = docSnap.data();
-          setUserXP(userData.xp);
-          setUserXP(userData.xp || 0); // Set XP to 0 if userData.xp is undefined
+          setUsername(userData.namefromemail  || userData.displayName);
+         // Set XP to 0 if userData.xp is undefined
         } else {
           // Handle case where user document doesn't exist
-          setUserXP(0);
+        
         }
       } else {
         setUser(null);
@@ -97,7 +97,7 @@ const Header = () => {
               />
             )}
             <h1 className="md:block font-bold text-xl max-md:text-sm">
-              {user ? `Welcome, ${user.displayName}` : "MarkINSIGHTS"}
+              {user ? `Welcome, ${user.displayName || username }` : "MarkINSIGHTS"}
             </h1>
           </a>
 
@@ -125,28 +125,28 @@ const Header = () => {
             <>
               <li>
                 <a
-                  href="/foodsnap"
+                  href="/"
                   className="max-md:hidden rounded-full px-2 py-2 -ml-4 text-black hover:bg-gray-300 transition duration-300 ease-in-out"
                 >
-                  Food
+                 home
                 </a>
               </li>
               <li>
                 <a
-                  href="/bodysnap"
+                  href="/csvupload"
                   className="max-md:hidden rounded-full px-2 py-2 -ml-4 text-black hover:bg-gray-300 transition duration-300 ease-in-out"
                 >
-                  Body
+                 csvupload
                 </a>
               </li>
               <li>
                 <a
-                  href="/skinsnap"
+                  href="/pricings"
                   className="max-md:hidden rounded-full px-2 py-2 -ml-4 text-black hover:bg-gray-300 transition duration-300 ease-in-out"
                 >
-                  Skin
+                 Pricings
                 </a>
-              </li>
+             </li>
               {/* <li>
                 <a
                   href="/wearos"
@@ -163,14 +163,7 @@ const Header = () => {
                   NutriCon
                 </a>
               </li> */}
-              <li>
-                <a
-                  href="/scoreboard"
-                  className="max-md:hidden rounded-full px-2 py-2 -ml-4 text-black hover:bg-gray-300 transition duration-300 ease-in-out"
-                >
-                  Scoreboard
-                </a>
-              </li>
+           
             </>
           )}
         </ul>
