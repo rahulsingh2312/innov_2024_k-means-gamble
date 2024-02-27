@@ -8,5 +8,8 @@ scikit-learn==1.2.2
 flask_cors
 dotenv
 bs4
+openai
+langchain
+langchain_community
 serp
 google-search-results

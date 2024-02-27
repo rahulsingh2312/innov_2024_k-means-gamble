@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div>
-      <footer className="bg-gray-900 bg-opacity-30 text-center justify-center dark:bg-transparent text-black lg:text-left mt-20">
+      <footer className="bg-gray-200 bg-opacity-30 text-center justify-center dark:bg-transparent text-black lg:text-left mt-20">
         <div className="flex items-center justify-center border-b-2 border-neutral-700 p-6 dark:border-neutral-500 lg:justify-between">
           <div className="mr-12 hidden lg:block">
             {/* <Analytics /> */}
@@ -168,7 +168,7 @@ const Footer = () => {
           <span>© 2023 Copyright:</span>
           <a
             className="font-semibold text-black"
-            href="https://github.com/prathikshetty2002/NutriSnap"
+            href="https://github.com/rahulsingh2312/markINSIGHTS"
           >
             {" "}
            K-means Gamble

@@ -1,4 +1,5 @@
 'use client'
+import { gsap } from "gsap";
 // import Illu from '/illustration.svg'
 // import img from 'next/img'
 // import {playfairDisplaySC , redRose } from '../../font'
@@ -192,20 +193,51 @@ function Dashboard() {
 
 
 
+  useEffect(() => {
+    gsap.set(".redball", { xPercent: -50, yPercent: -50 });
+    let targets = gsap.utils.toArray(".redball");
+    window.addEventListener("mouseleave", (e) => {
+      gsap.to(targets, {
+        duration: 0.5,
+        scale: 0,
+        ease: "power1.out",
+        overwrite: "auto",
+        stagger: 0.02,
+      });
+    });
+    window.addEventListener("mouseenter", (e) => {
+      gsap.to(targets, {
+        duration: 0.5,
+        scale: 1,
+        ease: "power1.out",
+        overwrite: "auto",
+        stagger: 0.02,
+      });
+    });
+    window.addEventListener("mousemove", (e) => {
+      gsap.to(targets, {
+        duration: 0.5,
+        x: e.clientX,
+        y: e.clientY,
+        ease: "power1.out",
+        overwrite: "auto",
+        stagger: 0.02,
+      });
+    });
+  }, []);
 
 
 
+    return ( <div className=''>
+<div className="redball z-50 blur-3xl bg-violet-400/50 w-96 h-96 fixed top-0 left-0 rounded-full"></div>
 
-    return ( <div className='bg-[#231F2B]'>
-
-
-<div className="LOGIN-FORM bg-[#231F2B]"> 
+<div className="LOGIN-FORM "> 
         <div className="flex">
 {/* laptop view design of left while on flex */}
 
 
 {/* actual form */}
-<div className='md:w-2/5 bg-[#231F2B]'>
+<div className='md:w-2/5 '>
 
 
 <div className={'' }>
@@ -217,12 +249,12 @@ function Dashboard() {
 
 
 
-<div className="flex md:w-96  justify-center ml-3 items-center h-screen bg-[#231F2B]">
-      <div className="w-full ml-96  h-auto bg-[#231F2B] p-8  shadow-lg">
+<div className="flex md:w-96 mt-20   justify-center ml-3 items-center h-screen ">
+      <div className="w-full ml-96 rounded-lg  h-auto bg-[#231F2B] p-8  shadow-lg">
         <h1 className="text-2xl md:ml-8 font-bold text-center text-gray-200 mb-8">Login to your Inves now Account</h1>
         <div
           onClick={handleGoogleLogin}
-            className="w-full md:w-96 bg-white mt-4 text-center text-black font-medium px-4 py-3 border-gray-900 border-2  items-center flex hover:bg-black hover:text-white cursor-pointer transition-all"
+            className="w-full md:w-80 bg-white mt-4 text-center text-black font-medium px-4 py-3 border-gray-900 border-2  items-center flex hover:bg-black hover:text-white cursor-pointer transition-all"
           >
             <img
               src="/google.svg"
@@ -246,7 +278,7 @@ function Dashboard() {
           />
           Continue with Phone
         </div></Link> */}
-          <div className='flex md:ml-5 justify-center items-center my-5'>
+          <div className='flex md:ml-5 text-white justify-center items-center my-5'>
  
      ------ OR ------
           </div>
@@ -255,7 +287,7 @@ function Dashboard() {
           onChange={(e) => setName(e.target.value)}  
           placeholder="Name"
           required
-          className="w-full md:w-96 text-black h-12 px-4 border border-gray-400  mb-4"
+          className="w-full md:w-80 text-black h-12 px-4 border border-gray-400  mb-4"
         />
         <input
           type="text"
@@ -263,7 +295,7 @@ function Dashboard() {
           onChange={(e) => setEmail(e.target.value)}  
           required                                    
           placeholder="Email"
-          className="w-full md:w-96 text-black h-12 px-4 border border-gray-400  mb-4"
+          className="w-full md:w-80 text-black h-12 px-4 border border-gray-400  mb-4"
         />
         
         <input
@@ -272,12 +304,12 @@ function Dashboard() {
                                 onChange={(e) => setPassword(e.target.value)} 
                                 required
           placeholder="Password"
-          className="w-full md:w-96 text-black h-12 px-4 border border-gray-400  mb-4"
+          className="w-full md:w-80 text-black h-12 px-4 border border-gray-400  mb-4"
         />
         <input
           type="password"
           placeholder="Confirm Password"
-          className="w-full md:w-96 text-black h-12 px-4 border border-gray-400  mb-4"
+          className="w-full md:w-80 text-black h-12 px-4 border border-gray-400  mb-4"
         />
         <div className="flex items-center justify-between mb-4">
           <label htmlFor="remember-me" className="text-gray-400  text-sm">
@@ -289,14 +321,14 @@ function Dashboard() {
           </a>
         </div>
         <button   type="submit" 
-                            onClick={onSubmit}               className="w-full md:w-96 h-12 bg-red-500 text-white font-semibold ">
+                            onClick={onSubmit}               className="w-full md:w-80 h-12 bg-red-500 text-white font-semibold ">
           Signup 
         </button>
       
       
         <div className="m-4 text-gray-300 text-sm">
           <span>Already Registered ?</span>
-          <a href="/dashboard" className="ml-2 text-pink-500 font-semibold">
+          <a href="/login" className="ml-2 text-pink-500 font-semibold">
             Login
           </a>
         </div>
