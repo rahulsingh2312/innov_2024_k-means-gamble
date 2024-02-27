@@ -9,7 +9,7 @@ import joblib
 clustering_model = joblib.load('clustering.joblib')
 encoder = joblib.load('encoder.joblib')
 
-# import brochure_generator 
+import brochure_generator 
 
 app = Flask(__name__)
 CORS(app)
@@ -67,8 +67,7 @@ def upload_file():
 app.route('/generate/brochure', methods=['POST'])
 def generate_brochure():
     data = request.get_json()
-    input = data["input"]
-    return brochure_generator.generate_brochure(input)
+    return brochure_generator.generate_brochure(data["product"], data["age_group"])
 
 if __name__ == "__main__":
   app.run() 
