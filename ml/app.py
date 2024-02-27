@@ -18,7 +18,7 @@ encoder = joblib.load('encoder.joblib')
 
 import brochure_generator 
 import caption_generator
-import locations
+# import locations
 
 app = Flask(__name__)
 CORS(app)
