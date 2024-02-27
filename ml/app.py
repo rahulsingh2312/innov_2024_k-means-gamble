@@ -41,7 +41,7 @@ def upload_file():
         if 'Gender' in user_data.columns:
             # Apply label encoding to the relevant column
             user_data['Gender'] = label_encoder.transform(user_data['Gender'])
-
+            user_data = user_data.drop(columns=['CustomerID'])
             # Use the clustering model to make predictions
             predictions = clustering_model.predict(user_data)
 
