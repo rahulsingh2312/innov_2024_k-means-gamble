@@ -24,7 +24,7 @@ import locations
 app = Flask(__name__)
 CORS(app)
 
-app.config['SECRET_KEY']=
+# app.config['SECRET_KEY']=
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USERNAME'] = 'srinathreddy329@gmail.com'
