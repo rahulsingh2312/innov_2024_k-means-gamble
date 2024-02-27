@@ -133,18 +133,11 @@ def generate_caption():
 @app.route('/locations', methods=['POST'])
 def location():
     data = request.get_json()
+    my_list = data["list"]
+    output = {"data": locations.get_locations(my_list)}
     output = {"data": locations.get_locations(data["list"])}
     return jsonify(output)
 
-    # return jsonify(output)
-# @app.route('/send/email', methods=['POST'])
-# def send_email():
-#     data = request.get_json()
-#     email = data["email"]
-#     msg = Message('Hello', sender = 'srinathreddy329@gmail.com', recipients = [email])
-#     msg.body = "Hello Flask message sent from Flask-Mail"
-#     mail.send(msg)
-#     return jsonify({"output": "Email sent"})
                   
 if __name__ == "__main__":
   app.run(port=5000) 
