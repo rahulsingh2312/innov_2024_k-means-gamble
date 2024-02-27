@@ -137,7 +137,7 @@ const Footer = () => {
                     alt=""
                     className="w-8 mr-2 rounded-full "
                   />
-                  Yash madhani
+                  Yash Madhani
                 </p>{" "}
               </a>
               <a target="_blank" href="">
@@ -147,7 +147,7 @@ const Footer = () => {
                     alt=""
                     className="w-8 mr-2 rounded-full"
                   />
-                  Srinath reddy
+                  Srinath Reddy
                 </p>
               </a>
               <a target="_blank" href="">
@@ -157,7 +157,7 @@ const Footer = () => {
                     alt=""
                     className="w-8 mr-2 rounded-full"
                   />
-                  Surabhi waingankar
+                  Surabhi Waingankar
                 </p>
               </a>
             </div>
