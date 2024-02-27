@@ -1,35 +1,49 @@
-"use client";
+'use client'
 import React, { useState, useEffect } from "react";
-
 import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
-
 import Plots from "./plots";
+
 const CsvUploader = () => {
   const router = useRouter();
-
   const [csvUrls, setCsvUrls] = useState([]);
   const [analysisResults, setAnalysisResults] = useState([]);
   const [user, setUser] = useState(null);
+  const [plotData, setPlotData] = useState(null);
   const [showPlots, setShowPlots] = useState(false);
-
-
+  const [uploadedFile, setUploadedFile] = useState(null);
+  const [fileName, setFileName] = useState('');
 
   const uploadCsv = async (e) => {
     const file = e.target.files[0];
+    setUploadedFile(file);
+    setFileName(file.name);
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "lodrnpjl");
-
-    
   };
 
+  const handleAnalyse = async () => {
+    const fileInput = document.getElementById("file"); // Assuming you have an input element for file upload with id 'file'
+    const file = fileInput.files[0]; // Get the first file selected by the user
+    const formData = new FormData();
+    formData.append("file", file); // Append the file to the FormData object
+    const url = "http://127.0.0.1:5000/upload"; // Update with your server URL
+    const options = {
+      method: "POST",
+      body: formData,
+    };
 
-
-
-  const handleAnalyse = () => {
-    setShowPlots(true);
+    try {
+      const response = await fetch(url, options);
+      const data = await response.json();
+      setPlotData(data); // Set the received data to the state variable
+      setShowPlots(true); // Show the plots
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
+
   useEffect(() => {
     gsap.set(".redball", { xPercent: -50, yPercent: -50 });
     let targets = gsap.utils.toArray(".redball");
@@ -62,11 +76,10 @@ const CsvUploader = () => {
       });
     });
   }, []);
+
   return (
     <>
-   
       <div className="redball blur-3xl bg-red-400/50 w-96 h-96 fixed top-0 left-0 rounded-full"></div>
-
       <div className="mx-auto text-center text-7xl max-sm:text-5xl max-md:text-6xl font-bold mt-10">
         Ready to Analyze your <span className="redtext">"User Data"</span> ?
       </div>
@@ -90,12 +103,7 @@ const CsvUploader = () => {
             >
               Upload CSV
             </label>
-            {csvUrls.length > 0 &&
-              csvUrls.map((url, index) => (
-                <div key={index} className="mt-4">
-                  <p>{url}</p>
-                </div>
-              ))}
+            {fileName && <p className="mt-5">File Uploaded: {fileName}</p>}
           </div>
         </div>
       </div>
@@ -111,7 +119,7 @@ const CsvUploader = () => {
       {showPlots && (
         <div className="flex justify-center">
           <div className="w-1/2 mx-2">
-            <Plots  />
+            {showPlots && <Plots plotData={plotData} />}
           </div>
         </div>
       )}
