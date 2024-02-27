@@ -73,6 +73,7 @@ def upload_file():
         # Check if the required column is present in the user-uploaded data
         if 'Gender' in user_data.columns:
             # Apply label encoding to the relevant column
+            gender_counts = user_data['Gender'].value_counts().astype(int)
             gender_data = user_data[['Gender']]
             # Apply OneHotEncoder to the 'Gender' column
             encoded_gender = encoder.transform(gender_data)
@@ -94,7 +95,7 @@ def upload_file():
             indices_of_three = [i for i, x in enumerate(my_arr) if x == 3]
             indices_of_four = [i for i, x in enumerate(my_arr) if x == 4]
             indices_of_five = [i for i, x in enumerate(my_arr) if x == 5]
-            output = {"predictions": predictions.tolist(), "count_0": counts[0], "count_1": counts[1], "count_2": counts[2], "count_3": counts[3], "count_4": counts[4], "count_5": counts[5], "indices_of_0": indices_of_zero,"indices_of_1": indices_of_one, "indices_of_2": indices_of_two, "indices_of_3": indices_of_three, "indices_of_4": indices_of_four, "indices_of_5": indices_of_five, "email": email_data}
+            output = {"predictions": predictions.tolist(), "count_0": counts[0], "count_1": counts[1], "count_2": counts[2], "count_3": counts[3], "count_4": counts[4], "count_5": counts[5], "indices_of_0": indices_of_zero,"indices_of_1": indices_of_one, "indices_of_2": indices_of_two, "indices_of_3": indices_of_three, "indices_of_4": indices_of_four, "indices_of_5": indices_of_five, "email": email_data, "number_of_males": int(gender_counts['Male']), "number_of_females": int(gender_counts['Female'])}
             return jsonify(output)
 
         else:
