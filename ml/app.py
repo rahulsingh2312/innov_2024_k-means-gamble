@@ -2,13 +2,14 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
 import base64
+from flask import Flask, render_template, request
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import LabelEncoder
 import joblib
+
 app = Flask(__name__)
 CORS(app)
-
 clustering_model = joblib.load('clustering.joblib')
 label_encoder = joblib.load('label_encoder.joblib')
 API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
@@ -27,7 +28,7 @@ def generate_code():
     encoded_string = base64.b64encode(response)
     output = {"image": encoded_string.decode("utf-8")}
     return jsonify(output)
-  
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     # Get the uploaded file
@@ -41,7 +42,7 @@ def upload_file():
         if 'Gender' in user_data.columns:
             # Apply label encoding to the relevant column
             user_data['Gender'] = label_encoder.transform(user_data['Gender'])
-            user_data = user_data.drop(columns=['CustomerID'])
+
             # Use the clustering model to make predictions
             predictions = clustering_model.predict(user_data)
 
