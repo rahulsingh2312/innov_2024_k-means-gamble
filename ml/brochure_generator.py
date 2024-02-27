@@ -2,13 +2,11 @@ from dotenv import load_dotenv
 import os
 # Load .env file
 load_dotenv()
-from bs4 import BeautifulSoup
-import requests
 # Get OpenAI keys from .env file
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 
-
+from langchain import PromptTemplate
 from langchain_community.chat_models import ChatOpenAI
 from langchain.output_parsers import ResponseSchema
 from langchain.output_parsers import StructuredOutputParser
@@ -20,12 +18,12 @@ def generate_brochure(product:str,age_group:str):
         description="This is the description for the given product"
     )
     tagline_schema=ResponseSchema(
-        name="explaination",
+        name="tagline",
         description="This is the tagline for the given product"
     )
     response_schema=[product_schema,tagline_schema]
     output_parser=StructuredOutputParser.from_response_schemas(response_schema)
-    format_instructions=output_parser.get_format_instructions()
+ 
   
     from langchain_core.prompts import (
         ChatPromptTemplate,
@@ -35,16 +33,18 @@ def generate_brochure(product:str,age_group:str):
     )
 
     
-
+    format_instructions=output_parser.get_format_instructions()
     prompt_template="""
-            Generate a brochure for the given product {product} for the age group {age_group}
+            Generate a brochure for the given product  {product} with a catchy tagline for the age group {age_group}.
             {format_instructions}
             """ 
 
-    prompt = ChatPromptTemplate.from_template(template=prompt_template)
-    messages=prompt.format_messages(
-        input=[product,age_group],
-        format_instructions=format_instructions
-    )
-    return model.invoke(messages)
-print(generate_brochure("car","adult"))
+    prompt =PromptTemplate(
+    input_variables=["product","age_group"],
+    template=prompt_template,
+     partial_variables={"format_instructions": output_parser.get_format_instructions()},
+)
+   
+    return model.invoke(prompt.format(product=product,age_group=age_group))
+print(generate_brochure(product="car",age_group="18-25"))
+
