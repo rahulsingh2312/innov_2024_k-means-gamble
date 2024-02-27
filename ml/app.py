@@ -8,7 +8,7 @@ import joblib
 import json 
 import os
 from collections import Counter
-from flask_mailman import Mail, EmailMessage
+# from flask_mail import Mail, Message
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -17,7 +17,8 @@ clustering_model = joblib.load('clustering.joblib')
 encoder = joblib.load('encoder.joblib')
 
 import brochure_generator 
-# import locations
+import caption_generator
+import locations
 
 app = Flask(__name__)
 CORS(app)
@@ -30,7 +31,7 @@ app.config['MAIL_PASSWORD'] = 'bmyn bgkx ziaa myea'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
-mail = Mail(app)
+# mail = Mail(app)
 
 API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
 headers = {"Authorization": "Bearer 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"}
@@ -115,18 +116,26 @@ def upload_file():
 @app.route('/generate/brochure', methods=['POST'])
 def generate_brochure():
     data = request.get_json()
-    output = brochure_generator.generate_brochure(data["product"], data["age_group"])
+    output = brochure_generator.generate_brochure(data["product"], data["income_tier"])
     string_output= str(output)
     response=slice_json(string_output)
     return response
 
-# @app.route('/locations', methods=['POST'])
-# def location():
-#     data = request.get_json()
-#     my_list = data["list"]
-#     output = {"data": locations.get_locations(my_list)}
+@app.route('/generate/caption', methods=['POST'])
+def generate_caption():
+    data = request.get_json()
+    output =caption_generator.generate_caption(data["product"])
+    string_output= str(output)
+    response=slice_json(string_output)
+    return response
 
-    # return jsonify(output)
+@app.route('/locations', methods=['POST'])
+def location():
+    data = request.get_json()
+    my_list = data["list"]
+    output = {"data": locations.get_locations(my_list)}
+
+    return jsonify(output)
 @app.route('/send/email', methods=['POST'])
 def send_email():
     data = request.get_json()

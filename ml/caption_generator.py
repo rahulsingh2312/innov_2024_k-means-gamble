@@ -12,30 +12,34 @@ from langchain.output_parsers import ResponseSchema
 from langchain.output_parsers import StructuredOutputParser
 model = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 
-def generate_brochure(product:str,income_tier:str):
-    product_schema=ResponseSchema(
-        name="description",
-        description="This is the description for the given product"
+def generate_caption(product:str):
+    instagram_schema=ResponseSchema(
+        name="insta_caption",
+        description="This is the instagram caption for the given product'ad"
     )
-    tagline_schema=ResponseSchema(
-        name="tagline",
-        description="This is the tagline for the given product"
+    facebook_schema=ResponseSchema(
+        name="facebook_caption",
+        description="This is the facebook caption for the given product'ad"
     )
-    response_schema=[product_schema,tagline_schema]
+    gmail_schema=ResponseSchema(
+        name="facebook_caption",
+        description="This is the gmail for the given product'ad"
+    )
+    response_schema=[instagram_schema,facebook_schema,gmail_schema]
     output_parser=StructuredOutputParser.from_response_schemas(response_schema)
  
   
     format_instructions=output_parser.get_format_instructions()
     prompt_template="""
-            Generate a brochure for the given product  {product} with a catchy tagline for the given income tier {income_tier}.
+            Generate a caption for the given product's ad for {product}. The caption should be catchy and should be suitable.
             {format_instructions}
             """ 
 
     prompt =PromptTemplate(
-    input_variables=["product","income_tier"],
+    input_variables=["product"],
     template=prompt_template,
      partial_variables={"format_instructions": output_parser.get_format_instructions()},
 )
    
-    return model.invoke(prompt.format(product=product,income_tier=income_tier))
+    return model.invoke(prompt.format(product=product))
 
