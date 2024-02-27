@@ -75,7 +75,7 @@ const Header = () => {
     <>
       {/* <Analytics /> */}
       <div
-        className={`text-gray-950 w-full fixed z-50 top-0 p-4 md:p-6 flex justify-between items-center max-md:mt-4`}
+        className={`text-gray-950 w-full p-4 md:p-6 flex justify-between items-center max-md:mt-4`}
       >
         <div className="flex md:mx-12 items-center gap-2">
           <a href="/" className="flex items-center">

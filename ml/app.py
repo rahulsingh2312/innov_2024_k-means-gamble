@@ -12,6 +12,7 @@ clustering_model = joblib.load('clustering.joblib')
 encoder = joblib.load('encoder.joblib')
 
 import brochure_generator 
+import locations
 
 app = Flask(__name__)
 CORS(app)
@@ -76,8 +77,14 @@ def upload_file():
             # Optionally, you can return or process the predictions as needed
             my_arr = predictions.tolist()
             counts = Counter(my_arr)
-            print(counts)
-            output = {"predictions": predictions.tolist(), "count_0": counts[0], "count_1": counts[1], "count_2": counts[2], "count_3": counts[3], "count_4": counts[4], "count_5": counts[5]}
+            # print(counts)
+            indices_of_zero = [i+1 for i, x in enumerate(my_arr) if x == 0]
+            indices_of_one = [i+1 for i, x in enumerate(my_arr) if x == 1]
+            indices_of_two = [i+1 for i, x in enumerate(my_arr) if x == 2]
+            indices_of_three = [i+1 for i, x in enumerate(my_arr) if x == 3]
+            indices_of_four = [i+1 for i, x in enumerate(my_arr) if x == 4]
+            indices_of_five = [i+1 for i, x in enumerate(my_arr) if x == 5]
+            output = {"predictions": predictions.tolist(), "count_0": counts[0], "count_1": counts[1], "count_2": counts[2], "count_3": counts[3], "count_4": counts[4], "count_5": counts[5], "indices_of_1": indices_of_one, "indices_of_2": indices_of_two, "indices_of_3": indices_of_three, "indices_of_4": indices_of_four, "indices_of_5": indices_of_five}
             return jsonify(output)
 
         else:
@@ -100,6 +107,12 @@ def scrape_data():
     output = brochure_generator.scrape_data(data["product"])
     return jsonify(output)
 
+@app.route('/locations', methods=['POST'])
+def location():
+    data = request.get_json()
+    my_list = data["list"]
+    output = locations.get_locations(my_list)
+    jsonify(output)
 
 if __name__ == "__main__":
   app.run() 
