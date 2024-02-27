@@ -8,7 +8,7 @@ import joblib
 import json 
 import os
 from collections import Counter
-from flask_mail import Mail, Message
+# from flask_mail import Mail, Message
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -17,6 +17,7 @@ clustering_model = joblib.load('clustering.joblib')
 encoder = joblib.load('encoder.joblib')
 
 import brochure_generator 
+import caption_generator
 # import locations
 
 app = Flask(__name__)
@@ -28,7 +29,7 @@ app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
-mail = Mail(app)
+# mail = Mail(app)
 
 API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
 headers = {"Authorization": "Bearer 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"}
@@ -114,6 +115,14 @@ def upload_file():
 def generate_brochure():
     data = request.get_json()
     output = brochure_generator.generate_brochure(data["product"], data["income_tier"])
+    string_output= str(output)
+    response=slice_json(string_output)
+    return response
+
+@app.route('/generate/caption', methods=['POST'])
+def generate_caption():
+    data = request.get_json()
+    output =caption_generator.generate_caption(data["product"])
     string_output= str(output)
     response=slice_json(string_output)
     return response
