@@ -65,7 +65,7 @@ const CsvUploader = () => {
   return (
     <>
    
-      <div className="redball blur-3xl bg-green-400/50 w-96 h-96 fixed top-0 left-0 rounded-full"></div>
+      <div className="redball blur-3xl bg-red-400/50 w-96 h-96 fixed top-0 left-0 rounded-full"></div>
 
       <div className="mx-auto text-center text-7xl max-sm:text-5xl max-md:text-6xl font-bold mt-10">
         Ready to Analyze your <span className="redtext">"User Data"</span> ?
@@ -75,7 +75,7 @@ const CsvUploader = () => {
       </p>
       <div className="flex max-md:flex-col mx-auto justify-center mt-8 px-24 max-sm:px-4">
         <div className="w-full">
-          <div className="w-fit max-md:w-11/12 p-8 max-sm:p-2 bg-green-100 border border-green-300 rounded-md h-fit max-h-min mx-auto mt-8 mb-8 flex-col items-center justify-center">
+          <div className="w-fit max-md:w-11/12 p-8 max-sm:p-2 bg-red-100 border border-red-300 rounded-md h-fit max-h-min mx-auto mt-8 mb-8 flex-col items-center justify-center">
             <div className=" flex-col items-center justify-center"></div>
             <input
               type="file"
@@ -102,7 +102,7 @@ const CsvUploader = () => {
       <div className="mt-8 flex justify-center">
         <button
           onClick={handleAnalyse}
-          className="items-center bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-800 transition duration-300 ease-in-out"
+          className="items-center bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-800 transition duration-300 ease-in-out"
         >
           Analyze
         </button>
