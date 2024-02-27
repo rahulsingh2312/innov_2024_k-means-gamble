@@ -6,7 +6,7 @@ pandas
 joblib
 scikit-learn==1.2.2
 flask_cors
-dotenv
+python_dotenv
 bs4
 openai
 langchain
