@@ -12,4 +12,5 @@ openai
 langchain
 langchain_community
 serp
+serpapi
 google-search-results

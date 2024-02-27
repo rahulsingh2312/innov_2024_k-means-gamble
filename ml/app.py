@@ -12,6 +12,7 @@ clustering_model = joblib.load('clustering.joblib')
 encoder = joblib.load('encoder.joblib')
 
 import brochure_generator 
+import locations
 
 app = Flask(__name__)
 CORS(app)
@@ -106,7 +107,12 @@ def scrape_data():
     output = brochure_generator.scrape_data(data["product"])
     return jsonify(output)
 
-
+@app.route('/locations', methods=['POST'])
+def location():
+    data = request.get_json()
+    my_list = data["list"]
+    output = locations.get_locations(my_list)
+    jsonify(output)
 
 if __name__ == "__main__":
   app.run() 

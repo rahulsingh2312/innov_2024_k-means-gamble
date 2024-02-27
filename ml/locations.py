@@ -18,4 +18,3 @@ def get_locations(buisness:list):
     interest_by_region = results["interest_by_region"]
     extracted_data = [{'location': entry['location'], 'extracted_value': entry['extracted_value']} for entry in interest_by_region]
     return extracted_data
-print(get_locations("restaurant"))
