@@ -8,7 +8,7 @@ import joblib
 import json 
 import os
 from collections import Counter
-from flask_mail import Mail, Message
+from flask_mailman import Mail, EmailMessage
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -21,10 +21,12 @@ import brochure_generator
 
 app = Flask(__name__)
 CORS(app)
+
+app.config['SECRET_KEY']=
 app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
+app.config['MAIL_PORT'] = 587
 app.config['MAIL_USERNAME'] = 'srinathreddy329@gmail.com'
-app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+app.config['MAIL_PASSWORD'] = 'bmyn bgkx ziaa myea'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
@@ -129,9 +131,26 @@ def generate_brochure():
 def send_email():
     data = request.get_json()
     email = data["email"]
-    msg = Message('Hello', sender = 'srinathreddy329@gmail.com', recipients = [email])
-    msg.body = "Hello Flask message sent from Flask-Mail"
-    mail.send(msg)
+    msg_title = "This is a test email"
+	sender = "srinathreddy239@gmail.com"
+	msg = Message(msg_title,sender=sender,recipients=[email])
+	msg_body = "This is the email body"
+	msg.body = ""
+	data = {
+		'app_name': "REBWAR AI",
+		'title': msg_title,
+		'body': msg_body,
+	}
+
+	msg.html = render_template("email.html",data=data)
+
+	try:
+		mail.send(msg)
+		return "Email sent..."
+	except Exception as e:
+		print(e)
+		return f"the email was not sent {e}"
+
     return jsonify({"output": "Email sent"})
                   
 if __name__ == "__main__":
