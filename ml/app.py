@@ -113,7 +113,7 @@ def location():
     my_list = data["list"]
     output = {"data": locations.get_locations(my_list)}
 
-    jsonify(output)
+    return jsonify(output)
 
 if __name__ == "__main__":
   app.run(port=5000) 
