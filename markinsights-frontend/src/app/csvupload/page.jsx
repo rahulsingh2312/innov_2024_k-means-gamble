@@ -39,6 +39,7 @@ const CsvUploader = () => {
     try {
       const response = await fetch(url, options);
       const data = await response.json();
+      console.log(data);
       setPlotData(data); // Set the received data to the state variable
       setShowPlots(true); // Show the plots
     } catch (error) {
@@ -124,7 +125,7 @@ const CsvUploader = () => {
 
         <div className="flex rounded-3xl  p-5 text-center justify-center">
 
-          <div className="border-pink-400 border-2  w-1/2 mx-2">
+          <div className="  w-1/2 mx-2">
             
             {showPlots && <Plots plotData={plotData} />}
           </div>

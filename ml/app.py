@@ -18,7 +18,7 @@ encoder = joblib.load('encoder.joblib')
 
 import brochure_generator 
 import caption_generator
-# import locations
+import locations
 
 app = Flask(__name__)
 CORS(app)
@@ -127,13 +127,13 @@ def generate_caption():
     response=slice_json(string_output)
     return response
 
-# @app.route('/locations', methods=['POST'])
-# def location():
-#     data = request.get_json()
-#     my_list = data["list"]
-#     output = {"data": locations.get_locations(my_list)}
+@app.route('/locations', methods=['POST'])
+def location():
+    data = request.get_json()
+    my_list = data["list"]
+    output = {"data": locations.get_locations(my_list)}
 
-    # return jsonify(output)
+    return jsonify(output)
 @app.route('/send/email', methods=['POST'])
 def send_email():
     data = request.get_json()

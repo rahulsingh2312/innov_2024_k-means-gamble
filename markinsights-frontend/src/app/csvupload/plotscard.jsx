@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
+import Link from 'next/link'
 import './Plots.css'; 
 
 const Plots = ({ plotData }) => {
@@ -100,25 +101,27 @@ const Plots = ({ plotData }) => {
                         }
 
                         return (
-                            <div key={index} className="col-lg-4  col-md-6 mb-4">
-                                <div className={bgColorClass}>
-                                    <div className="card-body">
-                                        <h5 className="card-title flex justify-center items-center">{`Level ${index + 1}`} {crownEmoji} {feedbackEmoji}</h5>
-                                        <canvas ref={ref => chartRefs.current[index] = ref} width="200" height="200"></canvas>
-                                        <p className="card-text my-9">
-                                            <strong>Total Customers:</strong> {classCount}
-                                            <br />
-                                            <strong>Percentage:</strong> {percentage}%
-                                            <br />
-                                            <strong className="text-blue-900">Male Percentage:</strong> {randomMalePercentage}%
-                                            <br />
-                                            <strong className="text-pink-700">Female Percentage:</strong> {randomFemalePercentage}%
-                                            <br />
-                                            {/* {feedbackEmoji && <span>{feedbackEmoji}</span>} */}
-                                        </p>
+                            <Link key={index} href={`/level${index + 1}`}>
+                                <div className="col-lg-4 col-md-6 mb-4" style={{ textDecoration: 'none' }}>
+                                    <div className={bgColorClass}>
+                                        <div className="card-body">
+                                            <h5 className="card-title flex justify-center items-center">{`Level ${index + 1}`} {crownEmoji} {feedbackEmoji}</h5>
+                                            <canvas ref={ref => chartRefs.current[index] = ref} width="200" height="200"></canvas>
+                                            <p className="card-text my-9">
+                                                <strong>Total Customers:</strong> {classCount}
+                                                <br />
+                                                <strong>Percentage:</strong> {percentage}%
+                                                <br />
+                                                <strong className="text-blue-900">Male Percentage:</strong> {randomMalePercentage}%
+                                                <br />
+                                                <strong className="text-pink-700">Female Percentage:</strong> {randomFemalePercentage}%
+                                                <br />
+                                                {/* {feedbackEmoji && <span>{feedbackEmoji}</span>} */}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         );
                     }
                     return null;
