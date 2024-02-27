@@ -46,5 +46,4 @@ def generate_brochure(product:str,age_group:str):
 )
    
     return model.invoke(prompt.format(product=product,age_group=age_group))
-print(generate_brochure(product="car",age_group="18-25"))
 
