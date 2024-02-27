@@ -15,15 +15,15 @@ model = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 def generate_caption(product:str):
     instagram_schema=ResponseSchema(
         name="insta_caption",
-        description="This is the instagram caption for the given product'ad"
+        description="This is the instagram caption for the given product'ad.It should contain about 20-30 words"
     )
     facebook_schema=ResponseSchema(
         name="facebook_caption",
-        description="This is the facebook caption for the given product'ad"
+        description="This is the facebook caption for the given product'ad.It should contain about 20-30 words"
     )
     gmail_schema=ResponseSchema(
         name="facebook_caption",
-        description="This is the gmail for the given product'ad"
+        description="This is the gmail for the given product'ad.It should contain about 150-250 words."
     )
     response_schema=[instagram_schema,facebook_schema,gmail_schema]
     output_parser=StructuredOutputParser.from_response_schemas(response_schema)
