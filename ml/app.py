@@ -111,7 +111,8 @@ def scrape_data():
 def location():
     data = request.get_json()
     my_list = data["list"]
-    output = locations.get_locations(my_list)
+    output = {"data": locations.get_locations(my_list)}
+
     jsonify(output)
 
 if __name__ == "__main__":
