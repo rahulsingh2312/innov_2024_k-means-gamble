@@ -25,14 +25,6 @@ def generate_brochure(product:str,age_group:str):
     output_parser=StructuredOutputParser.from_response_schemas(response_schema)
  
   
-    from langchain_core.prompts import (
-        ChatPromptTemplate,
-        # MessagesPlaceholder,
-        # HumanMessagePromptTemplate,
-        # SystemMessagePromptTemplate,
-    )
-
-    
     format_instructions=output_parser.get_format_instructions()
     prompt_template="""
             Generate a brochure for the given product  {product} with a catchy tagline for the age group {age_group}.

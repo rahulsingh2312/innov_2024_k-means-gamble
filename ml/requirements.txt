@@ -8,3 +8,5 @@ scikit-learn==1.2.2
 flask_cors
 dotenv
 bs4
+serp
+google-search-results
