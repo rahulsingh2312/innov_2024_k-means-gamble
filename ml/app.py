@@ -23,16 +23,6 @@ import locations
 app = Flask(__name__)
 CORS(app)
 
-app.config['SECRET_KEY']=
-app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USERNAME'] = 'srinathreddy329@gmail.com'
-app.config['MAIL_PASSWORD'] = 'bmyn bgkx ziaa myea'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-
-# mail = Mail(app)
-
 API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
 headers = {"Authorization": "Bearer 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"}
 
