@@ -6,16 +6,29 @@ from flask import Flask, render_template, request
 import pandas as pd
 import joblib
 import json 
+import os
 from collections import Counter
+from flask_mail import Mail, Message
+
+from dotenv import load_dotenv
+load_dotenv()
 
 clustering_model = joblib.load('clustering.joblib')
 encoder = joblib.load('encoder.joblib')
 
 import brochure_generator 
-import locations
+# import locations
 
 app = Flask(__name__)
 CORS(app)
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'srinathreddy329@gmail.com'
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
+mail = Mail(app)
 
 API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
 headers = {"Authorization": "Bearer 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"}
@@ -59,6 +72,10 @@ def upload_file():
         # Load the user-uploaded data into a DataFrame
         user_data = pd.read_csv(uploaded_file)
         user_data = user_data.drop(columns='CustomerID')
+        email_data = user_data['Email'].to_json(orient='records')
+        # email_data = email_data.to_array()
+        print(email_data)
+        user_data = user_data.drop(columns='Email')
         # print(user_data)
         # Check if the required column is present in the user-uploaded data
         if 'Gender' in user_data.columns:
@@ -78,13 +95,13 @@ def upload_file():
             my_arr = predictions.tolist()
             counts = Counter(my_arr)
             # print(counts)
-            indices_of_zero = [i+1 for i, x in enumerate(my_arr) if x == 0]
-            indices_of_one = [i+1 for i, x in enumerate(my_arr) if x == 1]
-            indices_of_two = [i+1 for i, x in enumerate(my_arr) if x == 2]
-            indices_of_three = [i+1 for i, x in enumerate(my_arr) if x == 3]
-            indices_of_four = [i+1 for i, x in enumerate(my_arr) if x == 4]
-            indices_of_five = [i+1 for i, x in enumerate(my_arr) if x == 5]
-            output = {"predictions": predictions.tolist(), "count_0": counts[0], "count_1": counts[1], "count_2": counts[2], "count_3": counts[3], "count_4": counts[4], "count_5": counts[5], "indices_of_1": indices_of_one, "indices_of_2": indices_of_two, "indices_of_3": indices_of_three, "indices_of_4": indices_of_four, "indices_of_5": indices_of_five}
+            indices_of_zero = [i for i, x in enumerate(my_arr) if x == 0]
+            indices_of_one = [i for i, x in enumerate(my_arr) if x == 1]
+            indices_of_two = [i for i, x in enumerate(my_arr) if x == 2]
+            indices_of_three = [i for i, x in enumerate(my_arr) if x == 3]
+            indices_of_four = [i for i, x in enumerate(my_arr) if x == 4]
+            indices_of_five = [i for i, x in enumerate(my_arr) if x == 5]
+            output = {"predictions": predictions.tolist(), "count_0": counts[0], "count_1": counts[1], "count_2": counts[2], "count_3": counts[3], "count_4": counts[4], "count_5": counts[5], "indices_of_0": indices_of_zero,"indices_of_1": indices_of_one, "indices_of_2": indices_of_two, "indices_of_3": indices_of_three, "indices_of_4": indices_of_four, "indices_of_5": indices_of_five, "email": email_data}
             return jsonify(output)
 
         else:
@@ -107,7 +124,15 @@ def generate_brochure():
 #     my_list = data["list"]
 #     output = {"data": locations.get_locations(my_list)}
 
-    return jsonify(output)
-
+    # return jsonify(output)
+@app.route('/send/email', methods=['POST'])
+def send_email():
+    data = request.get_json()
+    email = data["email"]
+    msg = Message('Hello', sender = 'srinathreddy329@gmail.com', recipients = [email])
+    msg.body = "Hello Flask message sent from Flask-Mail"
+    mail.send(msg)
+    return jsonify({"output": "Email sent"})
+                  
 if __name__ == "__main__":
   app.run(port=5000) 

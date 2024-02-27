@@ -11,7 +11,9 @@ const Plots = ({ plotData }) => {
             }
 
             const data = {
+                labels: ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5', 'Level 6'],
                 datasets: [{
+                    label: 'Number of Customers',
                     data: [
                         plotData.count_0,
                         plotData.count_1,
@@ -28,20 +30,35 @@ const Plots = ({ plotData }) => {
                         'purple',
                         'rgb(233, 30, 99)'
                     ]
-                }],
-                labels: ['High Income , Avg Spending', 'Low Income , High Spending', 'High Income , High Spending', 'High Income , Low Spending', 'Low Income , No Spending', 'Avg Income ,  Low Spending']
+                }]
             };
 
-            const ctx = document.getElementById('pieChart').getContext('2d');
+            const ctx = document.getElementById('barChart').getContext('2d');
             chartRef.current = new Chart(ctx, {
-                type: 'pie',
+                type: 'bar',
                 data: data,
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            position: 'right', // Positioning the legend to the right
+                            display: true,
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Levels'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Number of Customers'
+                            },
+                            beginAtZero: true
                         }
                     }
                 }
@@ -51,12 +68,10 @@ const Plots = ({ plotData }) => {
 
     return (
         <div>
-            {/*  */}
             <div className="m-9">
-                <canvas id="pieChart" width="400" height="400"></canvas>
-                {/* */}
+                <canvas id="barChart" width="400" height="400"></canvas>
             </div>
-            <h2 className="m-2">Pie Chart</h2> 
+            <h2 className="m-2">Bar Chart</h2> 
         </div>
     );
 };
