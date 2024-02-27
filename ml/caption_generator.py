@@ -31,6 +31,7 @@ def generate_caption(product:str):
   
     format_instructions=output_parser.get_format_instructions()
     prompt_template="""
+            Do not generate any random symbol.Every word should be meaningful.
             Generate a caption for the given product's ad for {product}. The caption should be catchy and should be suitable.
             {format_instructions}
             """ 
