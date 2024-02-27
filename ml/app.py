@@ -134,33 +134,8 @@ def location():
     data = request.get_json()
     my_list = data["list"]
     output = {"data": locations.get_locations(my_list)}
-
     return jsonify(output)
-@app.route('/send/email', methods=['POST'])
-def send_email():
-    data = request.get_json()
-    email = data["email"]
-    msg_title = "This is a test email"
-	sender = "srinathreddy239@gmail.com"
-	msg = Message(msg_title,sender=sender,recipients=[email])
-	msg_body = "This is the email body"
-	msg.body = ""
-	data = {
-		'app_name': "REBWAR AI",
-		'title': msg_title,
-		'body': msg_body,
-	}
 
-	msg.html = render_template("email.html",data=data)
-
-	try:
-		mail.send(msg)
-		return "Email sent..."
-	except Exception as e:
-		print(e)
-		return f"the email was not sent {e}"
-
-    return jsonify({"output": "Email sent"})
                   
 if __name__ == "__main__":
   app.run(port=5000) 
