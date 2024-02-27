@@ -12,7 +12,7 @@ from langchain.output_parsers import ResponseSchema
 from langchain.output_parsers import StructuredOutputParser
 model = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 
-def generate_brochure(product:str,age_group:str):
+def generate_brochure(product:str,income_tier:str):
     product_schema=ResponseSchema(
         name="description",
         description="This is the description for the given product"
@@ -27,15 +27,15 @@ def generate_brochure(product:str,age_group:str):
   
     format_instructions=output_parser.get_format_instructions()
     prompt_template="""
-            Generate a brochure for the given product  {product} with a catchy tagline for the age group {age_group}.
+            Generate a brochure for the given product  {product} with a catchy tagline for the given income tier {income_tier}.
             {format_instructions}
             """ 
 
     prompt =PromptTemplate(
-    input_variables=["product","age_group"],
+    input_variables=["product","income_tier"],
     template=prompt_template,
      partial_variables={"format_instructions": output_parser.get_format_instructions()},
 )
    
-    return model.invoke(prompt.format(product=product,age_group=age_group))
+    return model.invoke(prompt.format(product=product,income_tier=income_tier))
 

@@ -96,7 +96,7 @@ def upload_file():
 @app.route('/generate/brochure', methods=['POST'])
 def generate_brochure():
     data = request.get_json()
-    output = brochure_generator.generate_brochure(data["product"], data["age_group"])
+    output = brochure_generator.generate_brochure(data["product"], data["income_tier"])
     string_output= str(output)
     response=slice_json(string_output)
     return response
