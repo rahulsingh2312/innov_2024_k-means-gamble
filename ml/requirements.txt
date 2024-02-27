@@ -3,3 +3,5 @@ matplotlib
 requests
 numpy 
 pandas
+json
+flask_cors
