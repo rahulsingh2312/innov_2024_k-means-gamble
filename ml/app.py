@@ -6,6 +6,7 @@ from flask import Flask, render_template, request
 import pandas as pd
 import joblib
 import json 
+from collections import Counter
 
 clustering_model = joblib.load('clustering.joblib')
 encoder = joblib.load('encoder.joblib')
@@ -28,9 +29,13 @@ def slice_json(content):
     json_data = json.loads(unescaped_json_string)
     return json_data
 
+
+
 def query(payload):
 	response = requests.post(API_URL, headers=headers, json=payload)
 	return response.content
+
+
 
 @app.route('/generate/image', methods=['POST'])
 def generate_code():
@@ -41,6 +46,8 @@ def generate_code():
     encoded_string = base64.b64encode(response)
     output = {"image": encoded_string.decode("utf-8")}
     return jsonify(output)
+
+
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -67,13 +74,17 @@ def upload_file():
             # Use the clustering model to make predictions
             predictions = clustering_model.predict(user_data)
             # Optionally, you can return or process the predictions as needed
-            output = {"predictions": predictions.tolist()}
+            my_arr = predictions.tolist()
+            counts = Counter(my_arr)
+            print(counts)
+            output = {"predictions": predictions.tolist(), "count_0": counts[0], "count_1": counts[1], "count_2": counts[2], "count_3": counts[3], "count_4": counts[4], "count_5": counts[5]}
             return jsonify(output)
 
         else:
             return "Error: 'Category' column not found in the uploaded file."
 
     return "Error: No file uploaded."
+
 
 @app.route('/generate/brochure', methods=['POST'])
 def generate_brochure():
@@ -82,6 +93,13 @@ def generate_brochure():
     string_output= str(output)
     response=slice_json(string_output)
     return response
+
+@app.route('/scrape/data', methods=['POST'])
+def scrape_data():
+    data = request.get_json()
+    output = brochure_generator.scrape_data(data["product"])
+    return jsonify(output)
+
 
 if __name__ == "__main__":
   app.run() 
