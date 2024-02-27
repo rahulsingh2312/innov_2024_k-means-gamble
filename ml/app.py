@@ -18,7 +18,7 @@ encoder = joblib.load('encoder.joblib')
 
 import brochure_generator 
 import caption_generator
-# import locations
+import locations
 
 app = Flask(__name__)
 CORS(app)
@@ -127,21 +127,21 @@ def generate_caption():
     response=slice_json(string_output)
     return response
 
-# @app.route('/locations', methods=['POST'])
-# def location():
-#     data = request.get_json()
-#     my_list = data["list"]
-#     output = {"data": locations.get_locations(my_list)}
+@app.route('/locations', methods=['POST'])
+def location():
+    data = request.get_json()
+    output = {"data": locations.get_locations(data["list"])}
+    return jsonify(output)
 
     # return jsonify(output)
-@app.route('/send/email', methods=['POST'])
-def send_email():
-    data = request.get_json()
-    email = data["email"]
-    msg = Message('Hello', sender = 'srinathreddy329@gmail.com', recipients = [email])
-    msg.body = "Hello Flask message sent from Flask-Mail"
-    mail.send(msg)
-    return jsonify({"output": "Email sent"})
+# @app.route('/send/email', methods=['POST'])
+# def send_email():
+#     data = request.get_json()
+#     email = data["email"]
+#     msg = Message('Hello', sender = 'srinathreddy329@gmail.com', recipients = [email])
+#     msg.body = "Hello Flask message sent from Flask-Mail"
+#     mail.send(msg)
+#     return jsonify({"output": "Email sent"})
                   
 if __name__ == "__main__":
   app.run(port=5000) 
