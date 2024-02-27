@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
+import Plotscard from "./plotscard";
 import Plots from "./plots";
+import Plotsbar from "./plotbar";
 
 const CsvUploader = () => {
   const router = useRouter();
@@ -110,16 +112,25 @@ const CsvUploader = () => {
       <div className="mt-8 flex justify-center">
         <button
           onClick={handleAnalyse}
-          className="items-center bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-800 transition duration-300 ease-in-out"
+          className="items-center bg-red-600 text-white px-4 py-2 m-3 rounded-md hover:bg-red-800 transition duration-300 ease-in-out"
         >
           Analyze
         </button>
       </div>
-
       {showPlots && (
-        <div className="flex justify-center">
-          <div className="w-1/2 mx-2">
+        <Plotscard plotData={plotData} />
+      )}
+      {showPlots && (
+
+        <div className="flex rounded-3xl  p-5 text-center justify-center">
+
+          <div className="border-pink-400 border-2  w-1/2 mx-2">
+            
             {showPlots && <Plots plotData={plotData} />}
+          </div>
+          <div className="w-1/2">
+
+          {showPlots && <Plotsbar plotData={plotData} />}
           </div>
         </div>
       )}
