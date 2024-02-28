@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import Plotscard from "./plotscard";
 import Plots from "./plots";
 import Plotsbar from "./plotbar";
+import Twopie from './2pie'
 
 const CsvUploader = () => {
   const router = useRouter();
@@ -133,8 +134,12 @@ const CsvUploader = () => {
 
           {showPlots && <Plotsbar plotData={plotData} />}
           </div>
+         
         </div>
       )}
+       <div className="w-full">
+          {showPlots && <Twopie plotData={plotData} />}
+          </div>
     </>
   );
 };
