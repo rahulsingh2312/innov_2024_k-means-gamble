@@ -8,64 +8,64 @@ export function HeroParallaxDemo() {
 
 export const products = [
   {
-    title: "Moonbeam",
-    link: "https://gomoonbeam.com",
+    title: "Target Customers",
+    link: "#",
     thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/moonbeam.png",
+      "https://www.teamly.com/blog/wp-content/uploads/2023/04/understanding-target-audience.png",
   },
   {
-    title: "Cursor",
-    link: "https://cursor.so",
+    title: "Machine Learning",
+    link: "#",
     thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/cursor.png",
+      "https://emeritus.org/in/wp-content/uploads/sites/3/2023/03/types-of-machine-learning.jpg.optimal.jpg",
   },
   {
-    title: "Rogue",
-    link: "https://userogue.com",
+    title: "Segmentation",
+    link: "#",
     thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/rogue.png",
+      "https://www.salesforce.com/content/dam/blogs/uk/put-customers-at-centre-of-your-business-600.jpg",
   },
   {
-    title: "Editorially",
-    link: "https://editorially.org",
+    title: "Marketing",
+    link: "#",
     thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/editorially.png",
+      "https://cultbranding.com/ceo/wp-content/uploads/2013/08/What-is-Marketing-2.png",
   },
   {
-    title: "Editrix AI",
-    link: "https://editrix.ai",
+    title: "Real Time Analysis",
+    link: "#",
     thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/editrix.png",
+      "https://getthematic.com/insights/content/images/wordpress/2019/01/shutterstock_1112175710-1.jpg",
   },
   {
-    title: "Pixel Perfect",
-    link: "https://app.pixelperfect.quest",
+    title: "Demo Graphic Segmentation",
+    link: "#",
     thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/pixelperfect.png",
+      "https://cdn3.notifyvisitors.com/blog/wp-content/uploads/2022/03/What-is-demographic-segmentation.jpg",
   },
   {
-    title: "Algochurn",
-    link: "https://algochurn.com",
+    title: "Behavioral Segmentation",
+    link: "#",
     thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/algochurn.png",
+      "https://blog.salespanel.io/wp-content/uploads/2021/01/20945504.jpg",
   },
   {
-    title: "Aceternity UI",
-    link: "https://ui.aceternity.com",
+    title: "Marketing Campaigns",
+    link: "#",
     thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/aceternityui.png",
+      "https://goodjobs.co.in/wp-content/uploads/2023/07/Marketing-campaign-image-for-article-4939049309430393093.jpg",
   },
   {
-    title: "Tailwind Master Kit",
-    link: "https://tailwindmasterkit.com",
+    title: "Marketing brochures",
+    link: "#",
     thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/tailwindmasterkit.png",
+      "https://images.smiletemplates.com/uploads/screenshots/10/0000010120/brochure-templates-b.jpg",
   },
   {
-    title: "SmartBridge",
-    link: "https://smartbridgetech.com",
+    title: "Graphs and Charts Generation",
+    link: "#",
     thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/smartbridge.png",
+      "https://img.freepik.com/premium-vector/charts-diagrams-graphs-illustrations-business-marketing-statistics-data-analyzation_212168-709.jpg",
   },
   {
     title: "Renderwork Studio",

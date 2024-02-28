@@ -14,26 +14,26 @@ const BrochureGenerator = () => {
 
   const handleGenerateBrochure = async () => {
     try {
-      // const response = await axios.post('http://localhost:5000/generate/brochure', {
-      //   product,
-      //   income_tier: 'High Spending,Low Income'
-      // });
-      // const data = response.data;
-      // setBrochure(data);
-      // const Captionresponse = await axios.post('http://localhost:5000/generate/caption', {
-      //   product
-      // });
-      // console.log(Captionresponse)
-      // const Captiondata = Captionresponse.data;
-      // console.log(Captiondata);
-      // setCaption(Captiondata);
-      // console.log(caption);
-      // // Request image generation
-      // const imageResponse = await axios.post('http://localhost:5000/generate/image', {
-      //   text: product
-      // });
-      // const imageData = imageResponse.data;
-      // setImage(imageData.image);
+      const response = await axios.post('http://localhost:5000/generate/brochure', {
+        product,
+        income_tier: 'High Spending,Low Income'
+      });
+      const data = response.data;
+      setBrochure(data);
+      const Captionresponse = await axios.post('http://localhost:5000/generate/caption', {
+        product
+      });
+      console.log(Captionresponse)
+      const Captiondata = Captionresponse.data;
+      console.log(Captiondata);
+      setCaption(Captiondata);
+      console.log(caption);
+      // Request image generation
+      const imageResponse = await axios.post('http://localhost:5000/generate/image', {
+        text: product
+      });
+      const imageData = imageResponse.data;
+      setImage(imageData.image);
 
       const locationResponse = await axios.post('http://localhost:5000/locations', {
         product

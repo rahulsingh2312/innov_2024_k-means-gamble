@@ -102,9 +102,7 @@ export const Header = () => {
         <p className='text-red-950 p-0 m-0 inline-block'>MarkInSights</p> <br /> Customer Segmentation and Targeting
       </h1>
       <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200">
-        We build beautiful products with the latest technologies and frameworks.
-        We are a team of passionate developers and designers that love to build
-        amazing products.
+      Our Customer Segmentation and Targeting solution utilizes advanced machine learning algorithms to segment customers based on demographics, behavior, and preferences. Marketers can craft personalized campaigns tailored to each segment, optimizing engagement and ROI. Real-time adaptability and optimization tools ensure ongoing effectiveness in dynamic market environments.
       </p>
     </div>
   );
