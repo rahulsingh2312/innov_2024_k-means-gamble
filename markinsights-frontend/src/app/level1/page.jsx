@@ -167,7 +167,7 @@ const BrochureGenerator = () => {
         )}
       </div>
       
-      <div className="flex transform rotate-90 w-2/3 justify-center ">
+      <div className="flex transform rotate-90 w-full justify-center ">
         <canvas id="location-chart" width="400" height="400"></canvas>
       </div>
     </div>
