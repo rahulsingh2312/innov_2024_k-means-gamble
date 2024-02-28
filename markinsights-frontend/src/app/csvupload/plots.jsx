@@ -29,7 +29,7 @@ const Plots = ({ plotData }) => {
                         'rgb(233, 30, 99)'
                     ]
                 }],
-                labels: ['High Income , Avg Spending', 'Low Income , High Spending', 'High Income , High Spending', 'High Income , Low Spending', 'Low Income , No Spending', 'Avg Income ,  Low Spending']
+                labels: ['High Income , Low Spending - TARGET', 'Low Income , High Spending - CARELESS', 'High Income , High Spending - IDEAL', 'High Income , Low Spending - SENSIBLE', 'Low Income , Low Spending - STANDARD', 'Avg Income ,  Low Spending - CAREFUL']
             };
 
             const ctx = document.getElementById('pieChart').getContext('2d');
