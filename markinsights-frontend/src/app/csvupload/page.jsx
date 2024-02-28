@@ -137,9 +137,7 @@ const CsvUploader = () => {
          
         </div>
       )}
-       <div className="w-full">
-          {showPlots && <Twopie plotData={plotData} />}
-          </div>
+     
     </>
   );
 };
